@@ -1,7 +1,11 @@
 // src/pages/public/Home.jsx
+
 import React, { useState, useEffect } from 'react';
 import { getHomeConfig } from '../../services/api';
 import { HiCode, HiUsers, HiChatAlt2 } from 'react-icons/hi';
+// Tambahkan import Link di sini
+import { Link } from 'react-router-dom';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
@@ -34,6 +38,7 @@ function Home() {
   return (
     <div className="py-12 px-4">
       <div className="container mx-auto">
+        
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-24">
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
@@ -43,12 +48,21 @@ function Home() {
               {config?.heroSubtitle || 'Komunitas developer.'}
             </p>
             <div className="flex space-x-4">
-              <button className="px-6 py-3 bg-neum-bg text-accent-blue font-semibold rounded-lg shadow-neum-out hover:shadow-neum-out-hover active:shadow-neum-in-active transition-all">
+              {/* Tombol Mulai Belajar -> Mengarah ke /materi */}
+              <Link 
+                to="/materi" 
+                className="px-6 py-3 bg-neum-bg text-accent-blue font-semibold rounded-lg shadow-neum-out hover:shadow-neum-out-hover active:shadow-neum-in-active transition-all"
+              >
                 Mulai Belajar
-              </button>
-              <button className="px-6 py-3 bg-neum-bg text-gray-700 font-semibold rounded-lg shadow-neum-out hover:shadow-neum-out-hover active:shadow-neum-in-active transition-all">
+              </Link>
+              
+              {/* Tombol Gabung -> Mengarah ke /tentang */}
+              <Link 
+                to="/tentang" 
+                className="px-6 py-3 bg-neum-bg text-gray-700 font-semibold rounded-lg shadow-neum-out hover:shadow-neum-out-hover active:shadow-neum-in-active transition-all"
+              >
                 Gabung
-              </button>
+              </Link>
             </div>
           </div>
           
@@ -83,6 +97,7 @@ function Home() {
           </div>
         </section>
 
+        {/* --- Features Section (Tidak berubah) --- */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-8 bg-neum-bg rounded-xl shadow-neum-out text-center">
             <HiCode className="h-12 w-12 text-accent-blue mx-auto mb-4" />
@@ -100,6 +115,7 @@ function Home() {
             <p className="text-gray-600">Tanyakan masalah, bagikan solusi di ruang diskusi.</p>
           </div>
         </section>
+
       </div>
     </div>
   );
