@@ -51,14 +51,15 @@ function SaranKritik() {
           </div>
           
           <div className="flex items-center">
+            {/* PERBAIKAN DI SINI: Mengganti shadow-neum-in dengan border agar terlihat jelas */}
             <input
               id="isAnonymous"
               type="checkbox"
               checked={isAnonymous}
               onChange={(e) => setIsAnonymous(e.target.checked)}
-              className="h-4 w-4 rounded shadow-neum-in text-accent-blue focus:ring-accent-blue"
+              className="h-5 w-5 rounded border-2 border-gray-400 text-accent-green focus:ring-accent-green cursor-pointer bg-white"
             />
-            <label htmlFor="isAnonymous" className="ml-3 block text-sm font-medium text-gray-700">
+            <label htmlFor="isAnonymous" className="ml-3 block text-sm font-medium text-gray-700 cursor-pointer select-none">
               Kirim sebagai Anonim (sembunyikan nama Anda)
             </label>
           </div>
