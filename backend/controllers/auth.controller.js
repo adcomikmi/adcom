@@ -1,4 +1,5 @@
 // backend/controllers/auth.controller.js
+
 import User from '../models/User.model.js';
 import Admin from '../models/Admin.model.js';
 import jwt from 'jsonwebtoken';
@@ -42,8 +43,10 @@ export const loginUser = async (req, res) => {
 };
 
 export const googleCallback = (req, res) => {
+  // 1. Buat token
   const token = generateToken(req.user._id, req.user.role, false);
   
+  // 2. Siapkan data user
   const userData = {
     _id: req.user._id,
     nama: req.user.nama,
@@ -54,11 +57,15 @@ export const googleCallback = (req, res) => {
   
   const userDataString = JSON.stringify(userData);
   
-  // Mengirim data balik ke window utama (Client)
   res.send(`
     <script>
-      window.opener.postMessage(${userDataString}, '${process.env.CLIENT_URL || "http://localhost:5173"}');
-      window.close();
+      if (window.opener) {
+        window.opener.postMessage(${userDataString}, '*');
+        window.close();
+      } else {
+        // Fallback jika popup diblokir atau dibuka di tab baru
+        window.location.href = '${process.env.CLIENT_URL || "/"}';
+      }
     </script>
   `);
 };
